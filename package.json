@@ -1,0 +1,17 @@
+{
+  "name": "sensor-unit-normalizer",
+  "version": "0.0.0",
+  "description": "Convert sensor units with explicit precision, range and invalid-value rules.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/edilec/sensor-unit-normalizer"
+  }
+}
