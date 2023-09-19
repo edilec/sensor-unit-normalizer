@@ -1,0 +1,9 @@
+{
+  "readings": [
+    { "id": "ok", "value": 20, "unit": "degC", "targetUnit": "degF" },
+    { "id": "wrong-dimension", "value": 5, "unit": "m", "targetUnit": "kg" },
+    { "id": "below-absolute-zero", "value": -400, "unit": "degC", "targetUnit": "K" },
+    { "id": "unknown-unit", "value": 1, "unit": "furlong", "targetUnit": "m" },
+    { "id": "no-target", "value": 3, "unit": "m" }
+  ]
+}
