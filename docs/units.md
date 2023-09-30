@@ -72,6 +72,17 @@ convert(0, 'degC', 'degF', { precision: 6 })  // 32
 | `reading-malformed` | A batch entry is not an object. |
 | `target-unit-missing` | A batch entry has no target unit and none was declared for its dimension. |
 
+## A readings file that will not parse
+
+`normalize` reports the offset the parse failed at — position, line and column —
+and never the text it failed on. V8 reports a parse failure two ways and one of
+them quotes the input back, `Unexpected token 'A', "AKIAIOSFODNN7EXAMPLE" is not
+valid JSON`, which reproduces the first ten characters of the file, or the whole
+file when it is shorter than that. A readings file short enough to be nothing
+but a credential would otherwise be printed in full to stderr, on the one path
+an unparseable file is guaranteed to take. The quoted half is dropped before the
+message is built; the offset, which says nothing about content, is kept whole.
+
 `NaN` matters more than it looks. It propagates silently through arithmetic, so
 one bad sample can poison an entire derived series while every downstream check
 still reports success. It is refused at the boundary rather than converted.

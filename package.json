@@ -7,7 +7,7 @@
     "node": ">=22"
   },
   "scripts": {
-    "lint": "node --check src/index.mjs && node --check src/units.mjs && node --check bin/sensor-unit-normalizer.mjs && node --check test/convert.test.mjs && node --check test/cli.test.mjs",
+    "lint": "node --check src/index.mjs && node --check src/units.mjs && node --check bin/sensor-unit-normalizer.mjs && node --check test/convert.test.mjs && node --check test/cli.test.mjs && node --check test/parse-failure.test.mjs",
     "test": "node --test",
     "test:coverage": "node --test --experimental-test-coverage --test-coverage-include=src/**",
     "example": "node bin/sensor-unit-normalizer.mjs normalize examples/readings.json --precision 3",

@@ -3,7 +3,9 @@
 import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
-import { UnitError, convert, formatReport, normalizeReadings, unitNames } from '../src/index.mjs'
+import {
+  UnitError, convert, formatReport, normalizeReadings, parseFailureDetail, unitNames,
+} from '../src/index.mjs'
 
 const HELP = `sensor-unit-normalizer
 
@@ -47,6 +49,22 @@ function parseArguments(argv) {
   return options
 }
 
+/**
+ * Parse the readings file without letting it describe itself.
+ *
+ * V8 quotes the input back in one of its two parse-failure message shapes, so
+ * a readings file short enough to be nothing but a credential would be printed
+ * in full to stderr by its own error. `parseFailureDetail` keeps the offset,
+ * which is the half that helps, and drops the quoted half.
+ */
+function parseReadings(text) {
+  try {
+    return JSON.parse(text)
+  } catch (error) {
+    throw new Error(`The readings file is not valid JSON: ${parseFailureDetail(error)}.`)
+  }
+}
+
 async function main(argv) {
   let options
   try {
@@ -83,7 +101,7 @@ async function main(argv) {
     if (options.command === 'normalize') {
       const [file] = options.positional
       if (file === undefined) throw new Error('normalize requires a readings file')
-      const parsed = JSON.parse(await readFile(resolve(file), 'utf8'))
+      const parsed = parseReadings(await readFile(resolve(file), 'utf8'))
       const readings = Array.isArray(parsed) ? parsed : parsed.readings
       const report = normalizeReadings(readings, {
         precision: options.precision,
