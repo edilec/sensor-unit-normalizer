@@ -1,0 +1,15 @@
+{
+  "targetUnit": {
+    "temperature": "degC",
+    "pressure": "hPa",
+    "speed": "m/s",
+    "relative-humidity": "%RH"
+  },
+  "readings": [
+    { "id": "station-01-temp", "value": 68, "unit": "degF" },
+    { "id": "station-01-pressure", "value": 1.013, "unit": "bar" },
+    { "id": "station-01-wind", "value": 12, "unit": "km/h" },
+    { "id": "station-01-humidity", "value": 55, "unit": "%RH" },
+    { "id": "station-02-temp", "value": 291.15, "unit": "K" }
+  ]
+}

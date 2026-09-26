@@ -1,0 +1,50 @@
+{
+  "name": "sensor-unit-normalizer",
+  "version": "0.1.0",
+  "description": "Convert sensor units with explicit precision, range and invalid-value rules.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "lint": "node --check src/index.mjs && node --check src/units.mjs && node --check bin/sensor-unit-normalizer.mjs && node --check test/convert.test.mjs && node --check test/cli.test.mjs && node --check test/parse-failure.test.mjs",
+    "test": "node --test",
+    "test:coverage": "node --test --experimental-test-coverage --test-coverage-include=src/**",
+    "example": "node bin/sensor-unit-normalizer.mjs normalize examples/readings.json --precision 3",
+    "pack:check": "npm pack --dry-run",
+    "check": "npm run lint && npm test && npm run example && npm run pack:check"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edilec/sensor-unit-normalizer.git"
+  },
+  "bin": {
+    "sensor-unit-normalizer": "./bin/sensor-unit-normalizer.mjs"
+  },
+  "exports": {
+    ".": "./src/index.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "examples",
+    "docs",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "units",
+    "conversion",
+    "sensor",
+    "telemetry",
+    "temperature",
+    "cli"
+  ],
+  "author": "Edilec Private Limited",
+  "bugs": {
+    "url": "https://github.com/edilec/sensor-unit-normalizer/issues"
+  },
+  "homepage": "https://github.com/edilec/sensor-unit-normalizer#readme"
+}
